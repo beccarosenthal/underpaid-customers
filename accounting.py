@@ -24,32 +24,39 @@ customer6_name = "Ashley"
 customer6_melons = 3
 customer6_paid = 2.00
 
+
+
+
 customer1_expected = customer1_melons * melon_cost
 if customer1_expected != customer1_paid:
     print customer1_name, "paid {:.2f}, expected {:.2f}".format(
         customer1_paid, customer1_expected)
 
-customer2_expected = customer2_melons * melon_cost
-if customer2_expected != customer2_paid:
-    print customer2_name, "paid {:.2f}, expected {:.2f}".format(
-        customer2_paid, customer2_expected)
+data = open("customer-orders.txt")
 
-customer3_expected = customer3_melons * melon_cost
-if customer3_expected != customer3_paid:
-    print customer3_name, "paid {:.2f}, expected {:.2f}".format(
-        customer3_paid, customer3_expected)
+def verify_customer_payment(text_file):
+    """takes text file, returns info about customers who paid incorrectly"""
+    melon_cost = 1.00
 
-customer4_expected = customer4_melons * melon_cost
-if customer4_expected != customer4_paid:
-    print customer4_name, "paid {:.2f}, expected {:.2f}".format(
-        customer4_paid, customer4_expected)
+    for line in data:
+        line = line.rstrip()
+        words = line.split('|')
+        customer_id, customer_name, product, amount_paid = words
+        print line
+     
 
-customer5_expected = customer5_melons * melon_cost
-if customer5_expected != customer5_paid:
-    print customer5_name, "paid {:.2f}, expected {:.2f}".format(
-        customer5_paid, customer5_expected)
+# # def check_customer_paid_correctly(customer_name, quantity_purchased, amount_paid):
+# #     """if customer paid wrong amount of money, tells what they should ahve paid"""
 
-customer6_expected = customer6_melons * melon_cost
-if customer6_expected != customer6_paid:
-    print customer6_name, "paid {:.2f}, expected {:.2f}".format(
-        customer6_paid, customer6_expected)
+# #         for line in data:
+# #             line = line.rstrip()
+# #             words = line.split('|')
+
+# #         melon = words[0]
+# #         count = words[1]
+# #         amount = words[2]
+#         pass
+
+verify_customer_payment(data)
+
+
