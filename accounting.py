@@ -24,7 +24,7 @@ customer6_name = "Ashley"
 customer6_melons = 3
 customer6_paid = 2.00
 
-
+MELON_COST = 1.00
 
 
 customer1_expected = customer1_melons * melon_cost
@@ -35,18 +35,28 @@ if customer1_expected != customer1_paid:
 
 def verify_customer_payment(text_file):
     """takes text file, returns info about customers who paid incorrectly"""
-
-    melon_cost = 1.00
+    
     data = open(text_file)
 
     for line in data:
         line = line.rstrip()
-        words = line.split('|')
-        customer_id, customer_name, num_melons, customer_paid = words
+        customer_data_list = line.split('|')
+        customer_id, customer_name, num_melons, customer_paid = customer_data_list
+        customer_first_name = customer_name.split()[0]
+        num_melons = float(num_melons)
+        customer_paid = float(customer_paid)
 
-        customer_expected = melon_cost * float(num_melons)
-        if customer_expected != customer_paid:
-            print customer_name, "paid {:.2f}, expected {:.2f}".format(customer_paid, customer_expected)
+        customer_expected = MELON_COST * num_melons
+        # print customer_expected, "customer expected"
+        # print customer_paid, "customer paid"
+        if customer_expected < customer_paid:
+            print customer_first_name, "overpaid. Should have paid {:.2f}, but paid {:.2f}".format(customer_expected, customer_paid)
+
+        elif customer_expected > customer_paid:
+            print customer_first_name, "underpaid. Should have paid {:.2f}, but paid {:.2f}".format(customer_expected, customer_paid)
+    data.close()
+
+        #     print customer_name, "paid {:.2f}, expected {:.2f}".format(customer_paid, customer_expected)
 
 
 # # def check_customer_paid_correctly(customer_name, quantity_purchased, amount_paid):
